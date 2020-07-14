@@ -8,18 +8,11 @@
  * Ver   Date         Author                               Modification
  * 1.0   07-14-2020   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
 **/
-public with sharing class MyTeamOrdersController {
-    
-        
-            public decimal SumOders{
-                get{
-                    AggregateResult groupedResults = [SELECT SUM(TotalAmount__c) total FROM Account];
-                    return (decimal)groupedResults.get('total');
-        
-                }
-                set;
-            }
-        }
-
-    
+trigger OrderNetAmount on Order (before update) {
+   
+	
+        for( Order newOrder : Trigger.new){
+        newOrder.NetAmount__c = newOrder.TotalAmount - newOrder.ShipmentCost__c;
+    }
+    }
 

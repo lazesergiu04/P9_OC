@@ -8,6 +8,7 @@
  * Ver   Date         Author                               Modification
  * 1.0   07-14-2020   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
 **/
+
 @isTest
 private class testUpdateAccountCA {
     @isTest static void test() {

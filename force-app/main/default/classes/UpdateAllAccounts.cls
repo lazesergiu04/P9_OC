@@ -2,13 +2,15 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 07-14-2020
+ * @last modified on  : 07-16-2020
  * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
  * Modifications Log 
  * Ver   Date         Author                               Modification
  * 1.0   07-14-2020   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
 **/
 global class Batch01AccountChiffreAffaire implements Database.Batchable<sObject>{
+    //what is the connection with AccountUpdateAnnualRevenue trigger 
+    //as both have the setAccountIds
     
     global Database.QueryLocator start(Database.BatchableContext info){ 
         //Requeter seulement les comptes qui ont au moins une commande avec le Status 'Ordered'

@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 07-16-2020
+ * @last modified on  : 07-17-2020
  * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
  * Modifications Log 
  * Ver   Date         Author                               Modification
@@ -26,11 +26,11 @@ public with sharing class OrderTriggerHandler {
 	public void afterUpdate(){
 		
 		updateAccountRevenue();
-		updateAccountsFromOrder(oldOrder, newOrderMap)
+		updateAccountsFromOrder();
 	}
 
 
-    public static void updateAccountRevenue() {
+    private  void updateAccountRevenue() {
 		List<Account> accountsToUpdate = [SELECT Id, AnnualRevenue FROM Account WHERE Id IN :setAccountsIds];
 		for (Account currentAccount : accountsToUpdate) {
 		        currentAccount.AnnualRevenue += amount.get(currentAccount.Id);
@@ -38,16 +38,15 @@ public with sharing class OrderTriggerHandler {
 		update(accountsToUpdate);
 	}
 
-	public static void updateAccountsFromOrder(){
-		for(Order currentOrder : newOrderMap.values){
+	private  void updateAccountsFromOrder(){
+		for(Order currentOrder : newOrderMap.values()){
 			if (currentOrder.Status =='Ordered' ) {
 				
 				Decimal previousAmount = accountIdWithAmountsToAdd.get(currentOrder.AccountId);
 				accountIdWithAmountsToAdd.put(currentOrder.AccountId, previousAmount);
 
 			}
-		}update accountIdWithAmountsToAdd;
-		 update setAccountsIds;
+		}
 		
 	}
 

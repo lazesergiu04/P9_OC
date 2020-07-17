@@ -27,8 +27,6 @@ global class UpdateAccountsAR_Batch implements Database.Batchable<sObject>, Data
        
         /// Request only accounts that have at least one order with Status 'Ordered'
         return Database.getQueryLocator('Select Id,(Select Status From Orders Where Status = 'Ordered') From Account');
-    
- 
     }
      
     global void execute(Database.BatchableContext info, List<Account> scope){      
@@ -42,21 +40,10 @@ global class UpdateAccountsAR_Batch implements Database.Batchable<sObject>, Data
                 }
             }
         } 
-       
-        
         update scope; 
-        /** for(integer i=0; i < scope.size(); i++){
-             Account myAccount = scope[i];
-             myAccount.Chiffre_d_affaire__c = 0;
-            for(integer j=0; j < listOrders.size(); j++){
-                if(listOrders[j].AccountId == myAccount.Id){
-                    myAccount.Chiffre_d_affaire__c = myAccount.Chiffre_d_affaire__c + listOrders[j].TotalAmount;
-                }        
-            }
-         **/
+        
     }   
 
-    //add finsh
     global void finish(Database.Batchable info){
 
     }

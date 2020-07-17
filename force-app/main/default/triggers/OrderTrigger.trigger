@@ -18,8 +18,9 @@
  * **/
 trigger OrderTrigger on Order (before insert, after insert ) {
     if (Trigger.isAfter) {
-        List<Order> orders = Trigger.new;
-        OrderTriggerHandler.updateAccountRevenue();   
+        OrderTriggerHandler handler = new OrderTriggerHandler();
+        handler.afterUpdate();
+    
     }else {
         for(Order newOrder : Trigger.new){
             newOrder.NetAmount__c = newOrder.TotalAmount- newOrder.Shipment_Cost__c;

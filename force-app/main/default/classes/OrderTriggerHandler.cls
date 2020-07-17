@@ -20,33 +20,28 @@ public with sharing class OrderTriggerHandler {
 	 public Set<Id> setAccountsIds = new set<Id>();
 	 public Map<Id,Decimal> amount = new Map<Id,Decimal>();
 	 public Map<Id,Decimal> accountIdWithAmountsToAdd = new Map<Id,Decimal>();
-	 public Map<Id,Order> oldOrderMap = new Map<Id,Order>();
-	public Map<Id,Order> newOrderMap = new Map<Id,Order>();
-
-	public void afterUpdate(){
-		
-		updateAccountsFromOrder();
-		updateAccountRevenue();
-	}
-
-
-    private  void updateAccountRevenue() {
-		List<Account> accountsToUpdate = [SELECT Id, AnnualRevenue FROM Account WHERE Id IN :setAccountsIds];
-		for (Account currentAccount : accountsToUpdate) {
-		        currentAccount.AnnualRevenue += amount.get(currentAccount.Id);
-			}
-		update(accountsToUpdate);
-	}
-
-	private  void updateAccountsFromOrder(){
-		for(Order currentOrder : newOrderMap.values()){
-			if (currentOrder.Status =='Ordered' ) {
+	AccountUtil au = new AccountUtil();
 				
+
+	
+
+
+
+
+	public  void updateAccountsFromOrder(Map<Id,Order> orderOldMap, Map<Id,Order> orderNewMap){
+		for(Order currentOrder : orderNewMap.values()){
+			if (currentOrder.Status =='Ordered' ) {
+				if (accountIdWithAmountsToAdd.containsKey(currentOrder.AccountId)) {
+					//If there is an existing order add the amount to the order
 				Decimal previousAmount = accountIdWithAmountsToAdd.get(currentOrder.AccountId);
 				accountIdWithAmountsToAdd.put(currentOrder.AccountId, previousAmount);
 
+			}else {
+				//if there isn't an existing order for this Account, add a new Map<Id,Order>
+				 accountIdWithAmountsToAdd.put(currentOrder.AccountId, currentOrder.TotalAmount);
+				 setAccountsIds.add(currentOrder.AccountId);
 			}
-		}
+		} au.updateAccountAmount(setAccountsIds,accountIdWithAmountsToAdd);
 		
 	}
 

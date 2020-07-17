@@ -2,19 +2,14 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 07-16-2020
+ * @last modified on  : 07-17-2020
  * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
  * Modifications Log 
  * Ver   Date         Author                               Modification
  * 1.0   07-16-2020   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
 **/
 
-/**
- * This class is used to create a batch of Accounts to add
- * AnnualRevenue with the Order Amount when Order Status = Ordered
- * ?? where will be the class implemented?? tu run the batch ??
- * 
- **/
+
 global class UpdateAccountsAR_Batch implements Database.Batchable<sObject>, Database.Stateful {
     //Query to return sthe Accounts with Orders
     global String query ;
@@ -26,6 +21,7 @@ global class UpdateAccountsAR_Batch implements Database.Batchable<sObject>, Data
     global Database.QueryLocator start(Database.BatchableContext info){ 
        
         /// Request only accounts that have at least one order with Status 'Ordered'
+        //query on the Order and order.AccountId => set id 
         return Database.getQueryLocator('Select Id,(Select Status From Orders Where Status = 'Ordered') From Account');
     }
      

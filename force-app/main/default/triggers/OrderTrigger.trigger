@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 07-16-2020
+ * @last modified on  : 07-17-2020
  * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
  * Modifications Log 
  * Ver   Date         Author                               Modification
@@ -18,9 +18,10 @@
  * **/
 trigger OrderTrigger on Order (before insert, after insert ) {
     if (Trigger.isAfter) {
+            List<Order> triggerOrder = (List<Order>) Trigger.newMap;
+
         OrderTriggerHandler handler = new OrderTriggerHandler();
-        handler.afterUpdate();
-    
+        handler.updateAccountsFromOrder(Trigger.oldMap, Trigger.newMap);
     }else {
         for(Order newOrder : Trigger.new){
             newOrder.NetAmount__c = newOrder.TotalAmount- newOrder.Shipment_Cost__c;

@@ -14,18 +14,10 @@ public with sharing class AccountUtil {
         by Sum of Order.TotalAmount
      **/
 
-    public static void updateAccountAmount() {
-        Order order;
-    List<Account> accounts = [Select Id,(Select Id from Orders), AnnualRevenue From Account];
-        for (Account acc : accounts) {
-            if(order.AccountId == acc.Id && order.Status == 'Ordered' ){
-                acc.AnnualRevenue += order.TotalAmount;
-            }
-            
+    public static void updateAccountAmount(Set<Id> accountsId, Map<Id,Decimal> amount) {
+        List<Account> accToUpdate = [Select Id, AnnualRevenue From Account Where Id IN :accountsId];
+        For(Account acc : accToUpdate){
+            acc.AnnualRevenue += amount.get(acc.Id);
         }
-
-        }
+        update(accToUpdate);
     }
-
-    
-

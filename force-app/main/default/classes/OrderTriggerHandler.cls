@@ -25,8 +25,8 @@ public with sharing class OrderTriggerHandler {
 
 	public void afterUpdate(){
 		
-		updateAccountRevenue();
 		updateAccountsFromOrder();
+		updateAccountRevenue();
 	}
 
 

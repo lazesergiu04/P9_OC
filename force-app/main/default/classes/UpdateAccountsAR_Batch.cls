@@ -10,11 +10,9 @@
 **/
 
 
-global class UpdateAccountsAR_Batch implements Database.Batchable<sObject>, Database.Stateful {
+global class UpdateAccountsAR_Batch implements Database.Batchable<SObject> {
     //Query to return sthe Accounts with Orders
-    global String query ;
-  
-
+    global String query;
     global UpdateAccountsAR_Batch(String query){
         this.query = query;
     }
@@ -22,7 +20,7 @@ global class UpdateAccountsAR_Batch implements Database.Batchable<sObject>, Data
     global Database.QueryLocator start(Database.BatchableContext info){ 
        
 
-        return Database.getQueryLocator('SELECT Id, AnnualRevenue FROM Account WHERE Id IN (SELECT AccountId FROM Order)');
+        return Database.getQueryLocator('Select Id,(Select Status From Orders Where Status = 'Ordered') From Account');
     }
      
     global void execute(Database.BatchableContext info, List<Account> scope){      

@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 07-17-2020
+ * @last modified on  : 07-20-2020
  * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
  * Modifications Log 
  * Ver   Date         Author                               Modification
@@ -13,6 +13,7 @@
 global class UpdateAccountsAR_Batch implements Database.Batchable<sObject>, Database.Stateful {
     //Query to return sthe Accounts with Orders
     global String query ;
+  
 
     global UpdateAccountsAR_Batch(String query){
         this.query = query;
@@ -20,9 +21,8 @@ global class UpdateAccountsAR_Batch implements Database.Batchable<sObject>, Data
     
     global Database.QueryLocator start(Database.BatchableContext info){ 
        
-        /// Request only accounts that have at least one order with Status 'Ordered'
-        //query on the Order and order.AccountId => set id 
-        return Database.getQueryLocator('Select Id,(Select Status From Orders Where Status = 'Ordered') From Account');
+
+        return Database.getQueryLocator('SELECT Id, AnnualRevenue FROM Account WHERE Id IN (SELECT AccountId FROM Order)');
     }
      
     global void execute(Database.BatchableContext info, List<Account> scope){      

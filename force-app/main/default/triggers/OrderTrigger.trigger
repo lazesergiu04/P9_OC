@@ -16,7 +16,7 @@
  * 
  * 
  * **/
-trigger OrderTrigger on Order (before insert, after insert ) {
+trigger OrderTrigger on Order (before update, after update ) {
     if (Trigger.isAfter) {
             List<Order> triggerOrder = (List<Order>) Trigger.newMap;
 

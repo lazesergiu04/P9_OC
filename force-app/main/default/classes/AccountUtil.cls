@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : ChangeMeIn@UserSettingsUnder.SFDoc
  * @group             : 
- * @last modified on  : 07-17-2020
+ * @last modified on  : 07-20-2020
  * @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
  * Modifications Log 
  * Ver   Date         Author                               Modification
@@ -14,7 +14,7 @@ public with sharing class AccountUtil {
         by Sum of Order.TotalAmount
      **/
 
-    public static void updateAccountAmount(Set<Id> accountsId, Map<Id,Decimal> amount) {
+    public  void updateAccountAmount(Set<Id> accountsId, Map<Id,Decimal> amount) {
         List<Account> accToUpdate = [Select Id, AnnualRevenue From Account Where Id IN :accountsId];
         For(Account acc : accToUpdate){
             acc.AnnualRevenue += amount.get(acc.Id);

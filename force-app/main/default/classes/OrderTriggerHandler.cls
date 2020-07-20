@@ -41,7 +41,7 @@ public with sharing class OrderTriggerHandler {
 				 accountIdWithAmountsToAdd.put(currentOrder.AccountId, currentOrder.TotalAmount);
 				 setAccountsIds.add(currentOrder.AccountId);
 			}
-			}	
+			}	au.updateAccountAmount(setAccountsIds,accountIdWithAmountsToAdd);
 		
 	}
 

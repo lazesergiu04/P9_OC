@@ -9,6 +9,14 @@
  * 1.0   07-14-2020   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
 **/
 
+
+/**Create tests to check if the Accounts AnnualRevenue are updating with the Order Total Amount 
+ * Create test data: Product -> Product Price -> Order Ammount  (Quantity * Price) -> Accouunt AnnualRevenue
+ * How:  compare the AnnualRevenue before /after the execution of the test
+ * Make the assertionof the Total ammount 
+ * 
+ */
+
 @isTest
 private class testUpdateAccountCA {
     @isTest static void test() {

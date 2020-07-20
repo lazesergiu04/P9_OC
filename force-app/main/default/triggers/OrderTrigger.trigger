@@ -18,7 +18,7 @@
  * **/
 trigger OrderTrigger on Order (before update, after update ) {
     if (Trigger.isAfter) {
-            List<Order> triggerOrder = (List<Order>) Trigger.newMap;
+            List<Order> triggerOrder = Trigger.new;
 
         OrderTriggerHandler handler = new OrderTriggerHandler();
         handler.updateAccountsFromOrder(Trigger.oldMap, Trigger.newMap);

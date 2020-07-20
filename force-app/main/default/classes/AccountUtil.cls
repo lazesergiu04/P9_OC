@@ -9,10 +9,8 @@
  * 1.0   07-17-2020   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
 **/
 public with sharing class AccountUtil {
-    /**  Create list of Account that have Order records 
-        if the Order.Status = Ordered calculate the turnover/ Annual revenue 
-        by Sum of Order.TotalAmount
-     **/
+    //method that takes as param a set of account id and the ammounts 
+    //list of acconts that based on the accId and update the Annual Revenue
 
     public  void updateAccountAmount(Set<Id> accountsId, Map<Id,Decimal> amount) {
         List<Account> accToUpdate = [Select Id, AnnualRevenue From Account Where Id IN :accountsId];
@@ -21,3 +19,4 @@ public with sharing class AccountUtil {
         }
         update(accToUpdate);
     }
+}

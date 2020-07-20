@@ -9,24 +9,18 @@
  * 1.0   07-16-2020   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
 **/
 
-/**Triger Handler should update the Account AnnualRevenue with the Order TotalAmount 
+/**Triger Handler uses the Account Util class to update the account Annual Revenue
+ * Update the accounts based on Trigger.NewMap and Trigger.OldMap, <Id,Order> 
+ * When the Status= Ordered, updates the amount
  * 
  * 
  */
 public with sharing class OrderTriggerHandler {
 
-
-
 	 public Set<Id> setAccountsIds = new set<Id>();
 	 public Map<Id,Decimal> amount = new Map<Id,Decimal>();
 	 public Map<Id,Decimal> accountIdWithAmountsToAdd = new Map<Id,Decimal>();
 	 public AccountUtil au = new AccountUtil();
-				
-
-	
-
-
-
 
 	public  void updateAccountsFromOrder(Map<Id,Order> orderOldMap, Map<Id,Order> orderNewMap){
 		for(Order currentOrder : orderNewMap.values()){
@@ -48,4 +42,5 @@ public with sharing class OrderTriggerHandler {
 	
 
 
+}
 }

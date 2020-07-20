@@ -38,7 +38,7 @@ global class UpdateAccountsAR_Batch implements Database.Batchable<SObject> {
         
     }   
 
-    global void finish(Database.Batchable info){
+    global void finish(Database.BatchableContext bc){
 
     }
 

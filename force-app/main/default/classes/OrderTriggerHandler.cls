@@ -17,15 +17,17 @@
  */
 public with sharing class OrderTriggerHandler {
 
-	 public Set<Id> setAccountsIds = new set<Id>();
+	public Set<Id> setAccountsIds = new set<Id>();
 	 public Map<Id,Decimal> amount = new Map<Id,Decimal>();
 	 public Map<Id,Decimal> accountIdWithAmountsToAdd = new Map<Id,Decimal>();
 	 public AccountUtil au = new AccountUtil();
 
 	public  void updateAccountsFromOrder(Map<Id,Order> orderOldMap, Map<Id,Order> orderNewMap){
+        
 		for(Order currentOrder : orderNewMap.values()){
-			if (currentOrder.Status =='Ordered' ) {
-				if (orderOldMap.get(currentOrder.Id).Status != currentOrder.Status && currentOrder.Status == 'Ordered')  {
+            System.debug(currentOrder.Status);
+			
+                if (orderOldMap.get(currentOrder.Id).Status != currentOrder.Status && currentOrder.Status == 'Ordered')  {
 					//If there is an existing order add the amount to the order
 				Decimal previousAmount = accountIdWithAmountsToAdd.get(currentOrder.AccountId);
 				accountIdWithAmountsToAdd.put(currentOrder.AccountId, previousAmount);
@@ -38,9 +40,4 @@ public with sharing class OrderTriggerHandler {
 			}	AccountUtil.updateAccountAmount(setAccountsIds,accountIdWithAmountsToAdd);
 		
 	}
-
-	
-
-
-}
 }

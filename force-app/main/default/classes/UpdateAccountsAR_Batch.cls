@@ -11,22 +11,24 @@
 
 
 global class UpdateAccountsAR_Batch implements Database.Batchable<SObject> {
-    //Query to return sthe Accounts with Orders
-    global String query;
-    global UpdateAccountsAR_Batch(String query){
-        this.query = query;
+   
+  
+    global UpdateAccountsAR_Batch(){
+        
     }
     
     global Database.QueryLocator start(Database.BatchableContext info){ 
        
 
-        return Database.getQueryLocator('Select id, AnnualAmount from Account');
+        return Database.getQueryLocator('SELECT Id,AnnualRevenue FROM Account WHERE Id IN (SELECT AccountId FROM Order)');
     }
      
     global void execute(Database.BatchableContext info, List<Account> scope){      
         list<Order> listOrders =  [SELECT Id, TotalAmount, AccountId FROM Order];
+   		System.debug(listOrders + '-- List Orders');
         
         for(Account myAccount : scope){
+            System.debug(myAccount.AnnualRevenue + '-- acc Annual Revenue');
             myAccount.AnnualRevenue= 0;
             for(Order order : listOrders){
                 if (myAccount.Id == order.AccountId) {
@@ -35,6 +37,8 @@ global class UpdateAccountsAR_Batch implements Database.Batchable<SObject> {
             }
         } 
         update scope; 
+        System.debug(scope + '--scope');
+  
         
     }   
 

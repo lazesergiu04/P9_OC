@@ -16,6 +16,7 @@ public with sharing class AccountUtil {
         List<Account> accToUpdate = [Select Id, AnnualRevenue From Account Where Id IN :accountsId];
         For(Account acc : accToUpdate){
             if(acc.AnnualRevenue != null){
+                System.debug(acc.AnnualRevenue);
              
             
             System.debug(acc.id + ' --acc id ');

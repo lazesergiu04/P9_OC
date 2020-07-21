@@ -24,9 +24,11 @@ trigger OrderTrigger on Order (before update, after update ) {
         handler.updateAccountsFromOrder(Trigger.oldMap, Trigger.newMap);
     }else {
         for(Order newOrder : Trigger.new){
+            if (newOrder.TotalAmount != null && newOrder.Shipment_Cost__c != null){
             newOrder.NetAmount__c = newOrder.TotalAmount- newOrder.Shipment_Cost__c;
         }
         
     }
 
+}
 }

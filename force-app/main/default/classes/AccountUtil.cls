@@ -12,11 +12,20 @@ public with sharing class AccountUtil {
     //method that takes as param a set of account id and the ammounts 
     //list of acconts that based on the accId and update the Annual Revenue
 
-    public  void updateAccountAmount(Set<Id> accountsId, Map<Id,Decimal> amount) {
+    public static void updateAccountAmount(Set<Id> accountsId, Map<Id,Decimal> amount) {
         List<Account> accToUpdate = [Select Id, AnnualRevenue From Account Where Id IN :accountsId];
         For(Account acc : accToUpdate){
+            if(acc.AnnualRevenue != null){
+             
+            
+            System.debug(acc.id + ' --acc id ');
+           
             acc.AnnualRevenue += amount.get(acc.Id);
+             System.debug(acc.AnnualRevenue + '---annual revenue');
         }
         update(accToUpdate);
+       
     }
+   
+}
 }

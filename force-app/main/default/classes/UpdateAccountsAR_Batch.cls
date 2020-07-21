@@ -20,7 +20,7 @@ global class UpdateAccountsAR_Batch implements Database.Batchable<SObject> {
     global Database.QueryLocator start(Database.BatchableContext info){ 
        
 
-        return Database.getQueryLocator('Select Id,(Select Status From Orders Where Status = 'Ordered') From Account');
+        return Database.getQueryLocator('Select id, AnnualAmount from Account');
     }
      
     global void execute(Database.BatchableContext info, List<Account> scope){      

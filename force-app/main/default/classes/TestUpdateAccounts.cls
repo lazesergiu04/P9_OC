@@ -15,10 +15,10 @@
  * How:  compare the AnnualRevenue before /after the execution of the test
  * Make the assertionof the Total ammount 
  * 
- */
+ **/
 
 @isTest
-private class testUpdateAccountCA {
+private class TestUpdateAccounts {
     @isTest static void test() {
         Account acc1 = new Account(Name = 'Test Account 1');
         insert acc1;

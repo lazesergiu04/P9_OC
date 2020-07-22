@@ -25,19 +25,24 @@ public with sharing class OrderTriggerHandler {
 	public  void updateAccountsFromOrder(Map<Id,Order> orderOldMap, Map<Id,Order> orderNewMap){
         
 		for(Order currentOrder : orderNewMap.values()){
-            System.debug(currentOrder.Status);
-			
+          
                 if (orderOldMap.get(currentOrder.Id).Status != currentOrder.Status && currentOrder.Status == 'Ordered')  {
 					//If there is an existing order add the amount to the order
-				Decimal previousAmount = accountIdWithAmountsToAdd.get(currentOrder.AccountId);
-				accountIdWithAmountsToAdd.put(currentOrder.AccountId, previousAmount);
+					
+					accountIdWithAmountsToAdd.put(currentOrder.AccountId, currentOrder.TotalAmount);
+				
+                    setAccountsIds.add(currentOrder.AccountId);
+                   
+                    System.debug(accountIdWithAmountsToAdd + ' --- acc to add afer put()');
 
 			}else {
 				//if there isn't an existing order for this Account, add a new Map<Id,Order>
 				 accountIdWithAmountsToAdd.put(currentOrder.AccountId, currentOrder.TotalAmount);
+                
 				 setAccountsIds.add(currentOrder.AccountId);
 			}
 			}	AccountUtil.updateAccountAmount(setAccountsIds,accountIdWithAmountsToAdd);
-		
+			
+        	System.debug(accountIdWithAmountsToAdd + ' -- acc id with amount at AccountUtil');
 	}
 }

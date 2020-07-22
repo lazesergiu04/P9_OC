@@ -13,6 +13,10 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>OrderTrigger_Test</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>TestUpdateAccounts</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -33,6 +37,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Order.Shipment_Cost__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Order.TotalAmount</field>
         <readable>true</readable>
     </fieldPermissions>
     <layoutAssignments>

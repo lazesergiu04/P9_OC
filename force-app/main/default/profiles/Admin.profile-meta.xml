@@ -5,6 +5,10 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>MyTeamController_Test</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>MyTeamOrdersController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -26,6 +30,10 @@
     </classAccesses>
     <classAccesses>
         <apexClass>UpdateAccountsAR_Batch</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>UpdateAccountsBatch_Test</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <custom>false</custom>

@@ -35,12 +35,7 @@ public with sharing class OrderTriggerHandler {
                    
                     System.debug(accountIdWithAmountsToAdd + ' --- acc to add afer put()');
 
-			}else {
-				//if there isn't an existing order for this Account, add a new Map<Id,Order>
-				 accountIdWithAmountsToAdd.put(currentOrder.AccountId, currentOrder.TotalAmount);
-                
-				 setAccountsIds.add(currentOrder.AccountId);
-			}
+				}
 			}	AccountUtil.updateAccountAmount(setAccountsIds,accountIdWithAmountsToAdd);
 			
         	System.debug(accountIdWithAmountsToAdd + ' -- acc id with amount at AccountUtil');

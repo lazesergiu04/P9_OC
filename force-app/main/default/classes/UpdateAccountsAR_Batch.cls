@@ -12,14 +12,10 @@
 
 global class UpdateAccountsAR_Batch implements Database.Batchable<SObject> {
    
-  
-    global UpdateAccountsAR_Batch(){
-        
-    }
+    global UpdateAccountsAR_Batch(){}
     
     global Database.QueryLocator start(Database.BatchableContext info){ 
-       
-
+        
         return Database.getQueryLocator('SELECT Id,AnnualRevenue FROM Account WHERE Id IN (SELECT AccountId FROM Order)');
     }
      
@@ -38,12 +34,8 @@ global class UpdateAccountsAR_Batch implements Database.Batchable<SObject> {
         } 
         update scope; 
         System.debug(scope + '--scope');
-  
-        
     }   
 
-    global void finish(Database.BatchableContext bc){
-
-    }
+    global void finish(Database.BatchableContext bc){ }
 
 }

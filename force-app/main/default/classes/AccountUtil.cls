@@ -16,13 +16,10 @@ public with sharing class AccountUtil {
         List<Account> accToUpdate = [Select Id, AnnualRevenue From Account Where Id IN :accountsId];
         For(Account acc : accToUpdate){
             if(acc.AnnualRevenue != null){
-                System.debug(acc.AnnualRevenue);
-             
-            
-            System.debug(acc.id + ' --acc id ');
-           
+      System.debug(acc.AnnualRevenue + ' --- Acc AnnualRevenue') ;
+      System.debug(acc.id + ' -- Acc ID ');
             acc.AnnualRevenue += amount.get(acc.Id);
-             System.debug(acc.AnnualRevenue + '---annual revenue');
+      System.debug(acc.AnnualRevenue + '---Annual Revenue calculated ');
         }
         update(accToUpdate);
        

@@ -27,14 +27,10 @@ public with sharing class OrderTriggerHandler {
 		for(Order currentOrder : orderNewMap.values()){
           
                 if (orderOldMap.get(currentOrder.Id).Status != currentOrder.Status && currentOrder.Status == 'Ordered')  {
-					//If there is an existing order add the amount to the order
-					
+					//If there is an existing order add the amount to the order 
 					accountIdWithAmountsToAdd.put(currentOrder.AccountId, currentOrder.TotalAmount);
-				
                     setAccountsIds.add(currentOrder.AccountId);
-                   
                     System.debug(accountIdWithAmountsToAdd + ' --- acc to add afer put()');
-
 				}
 			}	AccountUtil.updateAccountAmount(setAccountsIds,accountIdWithAmountsToAdd);
 			

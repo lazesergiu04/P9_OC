@@ -80,7 +80,7 @@ public class UpdateAccountsBatch_Test {
 	}
     
     @isTest
-	static void given100orderOfPrice12_WhenUpdateAccountsByBatch_ThenUpdateAccountRevenuTo1200(){
+	static void updateAccountRevenue_withAccountMultipleOrders(){
 		Test.startTest();
 		UpdateAccountsAR_Batch updateAccountsB = new UpdateAccountsAR_Batch();
 		Database.executeBatch(updateAccountsB);

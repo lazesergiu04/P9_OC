@@ -4,10 +4,7 @@
         <apexClass>AccountUtil</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>MyTeamController_Test</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
+    
     <classAccesses>
         <apexClass>MyTeamOrdersController</apexClass>
         <enabled>true</enabled>
@@ -24,10 +21,7 @@
         <apexClass>TestUpdateAccounts</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>UpdateAccounts</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
+    
     <classAccesses>
         <apexClass>UpdateAccountsAR_Batch</apexClass>
         <enabled>true</enabled>
